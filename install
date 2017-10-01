@@ -81,10 +81,12 @@ sudo apt install -y avrdude arduino-core arduino-mk git python-dev python-rpi.gp
 
 # Configure new user.
 logbox_home=/home/logbox
-sudo useradd --home-dir "$logbox_home" --create-home --groups adm,dialout,netdev,gpio,users,i2c logbox
+sudo useradd --home-dir "$logbox_home" --create-home --groups adm,dialout,netdev,gpio,users,i2c,sudo logbox
 echo "logbox:$LOGBOX_PASSWORD" | sudo chpasswd
 echo "PermitRootLogin no" | sudo tee -a /etc/ssh/sshd_config
 echo "AllowUsers logbox" | sudo tee -a /etc/ssh/sshd_config
+echo "logbox ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/010_logbox-nopasswd
+sudo chsh -s /bin/bash logbox
 
 # Download required scripts.
 cd "$logbox_home"
