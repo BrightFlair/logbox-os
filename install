@@ -88,9 +88,10 @@ echo "AllowUsers logbox" | sudo tee -a /etc/ssh/sshd_config
 
 # Download required scripts.
 cd "$logbox_home"
-git clone https://github.com/BrightFlair/logbox-avr avr
-git clone https://github.com/BrightFlair/logbox-hat.git hat
-git clone https://github.com/BrightFlair/logbox-hat-update.git hat-update
+sudo git clone https://github.com/BrightFlair/logbox-avr avr
+sudo git clone https://github.com/BrightFlair/logbox-hat.git hat
+sudo git clone https://github.com/BrightFlair/logbox-hat-update.git hat-update
+sudo chown -R logbox:logbox "$logbox_home"
 
 # Link scripts in place for execution.
 sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
