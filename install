@@ -1,1 +1,102 @@
 #!/bin/bash
+set -e
+
+# Adapted from raspi-config source
+# 1: variable name
+# 2: new variable value
+# 3: config file to update
+set_config_var() {
+	tmp="/tmp/set_config_var$3.bak"
+	tmpdir=$(dirname "${tmp}")
+	mkdir -p $tmpdir
+	sudo lua - "$1" "$2" "$3" <<EOF > "$tmp"
+local key=assert(arg[1])
+local value=assert(arg[2])
+local fn=assert(arg[3])
+local file=assert(io.open(fn))
+local made_change=false
+for line in file:lines() do
+  if line:match("^#?%s*"..key.."=.*$") then
+    line=key.."="..value
+    made_change=true
+  end
+  print(line)
+end
+
+if not made_change then
+  print(key.."="..value)
+end
+EOF
+	sudo mv "$tmp" "$3"
+}
+
+# There must be a password supplied to the script as an environment variable.
+if [ -z "$LOGBOX_PASSWORD" ]
+then
+	echo "Password must be set to install"
+	exit 1
+fi
+
+# Set the device's name from its MAC address.
+mac=$(sed s/://gi /sys/class/net/eth0/address)
+mac=${mac:(-6)}
+hostname="LogBox-$mac"
+echo "$hostname" | sudo tee /etc/hostname
+echo -e "127.0.0.1\t$hostname"
+
+# If Wifi details are supplied, configure them here.
+if [ -z ${LOGBOX_WIFI+x} ]
+then
+	echo "No WIFI connection set"
+else
+	wifi_config="/home/pi/wpa_supplicant.conf"
+	echo "" > $wifi_config
+	echo "network={" >> $wifi_config
+	echo "ssid=\"$LOGBOX_WIFI\"" >> $wifi_config
+
+	if [ -z ${LOGBOX_WIFI_PASSWORD+x} ]
+	then
+		echo "No WIFI password"
+	else
+		echo "psk=\"$LOGBOX_WIFI_PASSWORD\"" >> $wifi_config
+	fi
+
+	echo "}" >> $wifi_config
+
+	cat $wifi_config | sudo tee --append /etc/wpa_supplicant/wpa_supplicant.conf
+fi
+
+# Disable terminal over serial, allowing programmable serial connection.
+serial_device="serial0"
+sudo systemctl stop serial-getty@$serial_device.service
+sudo systemctl disable serial-getty@$serial_device.service
+set_config_var enable_uart 1 /boot/config.txt
+sudo sed -i /boot/cmdline.txt -e "s/console=ttyAMA0,[0-9]\+ //"
+sudo sed -i /boot/cmdline.txt -e "s/console=serial0,[0-9]\+ //"
+
+# Install necessary software.
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y avrdude arduino-core arduino-mk git python-dev python-rpi.gpio minicom unzip fail2ban
+
+# Configure new user.
+logbox_home=/home/logbox
+sudo useradd --home-dir "$logbox_home" --create-home --groups adm,dialout,netdev,gpio,users,i2c logbox
+echo "logbox:$LOGBOX_PASSWORD" | sudo chpasswd
+echo "PermitRootLogin no" | sudo tee -a /etc/ssh/sshd_config
+echo "AllowUsers logbox" | sudo tee -a /etc/ssh/sshd_config
+
+# Download required scripts.
+cd "$logbox_home"
+git clone https://github.com/BrightFlair/logbox-avr avr
+git clone https://github.com/BrightFlair/logbox-hat.git hat
+git clone https://github.com/BrightFlair/logbox-hat-update.git hat-update
+
+# Link scripts in place for execution.
+sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
+sudo mv /usr/bin/avrdude /usr/bin/avrdude-original
+sudo ln -s "$logbox_home"/avr/avrdude-autoreset /usr/bin/avrdude
+sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-update
+
+# All done!
+sudo reboot
