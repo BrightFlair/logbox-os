@@ -102,5 +102,12 @@ sudo mv /usr/bin/avrdude /usr/bin/avrdude-original
 sudo ln -s "$logbox_home"/avr/avrdude-autoreset /usr/bin/avrdude
 sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-update
 
+# Install OS scripts (this repo is merged into $logbox_home, special folders copied into OS).
+sudo git clone https://github.com/BrightFlair/logbox-os /tmp/logbox-os
+sudo mv /tmp/logbox-os/* "$logbox_home"
+sudo chown -R logbox:logbox "$logbox_home"
+sudo rm -rf /tmp/logbox-os
+sudo cp -R "$logbox_home"/cron.d /etc/cron.d
+
 # All done!
 sudo reboot
