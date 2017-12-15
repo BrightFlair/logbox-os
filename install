@@ -42,7 +42,7 @@ mac=$(sed s/://gi /sys/class/net/eth0/address)
 mac=${mac:(-6)}
 hostname="LogBox-$mac"
 echo "$hostname" | sudo tee /etc/hostname
-echo -e "127.0.0.1\t$hostname"
+echo -e "127.0.0.1\t$hostname" | sudo tee /etc/hosts
 
 # If Wifi details are supplied, configure them here.
 if [ -z ${LOGBOX_WIFI+x} ]
