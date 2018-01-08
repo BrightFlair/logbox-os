@@ -16,6 +16,12 @@ then
 	sudo reboot
 fi
 
+until /home/logbox/os/report-ip.bash
+do
+	echo "Waiting for internet..."
+	sleep 1
+done
+
 # TODO: Set up WiFi if config file exists.
 
 # Update all components
