@@ -46,5 +46,7 @@ sudo mv "$avrdude_path" "$avrdude_path-original"
 sudo ln -s "$logbox_home/avr/avrdude-autoreset" "$avrdude_path"
 sudo ln -s "$logbox_home/hat-update/logbox-hat-update" "$logbox_hat_update_path"
 
+"$(logbox_hat_update_path)"
+
 # Copy special directories
 sudo rsync --delete --recursive "$logbox_home/os/cron.d" /etc/cron.d
