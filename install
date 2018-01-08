@@ -37,34 +37,9 @@ then
 	exit 1
 fi
 
-# Set the device's name from its MAC address.
-mac=$(sed s/://gi /sys/class/net/eth0/address)
-mac=${mac:(-6)}
-hostname="LogBox-$mac"
-echo "$hostname" | sudo tee /etc/hostname
-echo -e "127.0.0.1\t$hostname" | sudo tee /etc/hosts
-
-# If Wifi details are supplied, configure them here.
-if [ -z ${LOGBOX_WIFI+x} ]
-then
-	echo "No WIFI connection set"
-else
-	wifi_config="/home/pi/wpa_supplicant.conf"
-	echo "" > $wifi_config
-	echo "network={" >> $wifi_config
-	echo "ssid=\"$LOGBOX_WIFI\"" >> $wifi_config
-
-	if [ -z ${LOGBOX_WIFI_PASSWORD+x} ]
-	then
-		echo "No WIFI password"
-	else
-		echo "psk=\"$LOGBOX_WIFI_PASSWORD\"" >> $wifi_config
-	fi
-
-	echo "}" >> $wifi_config
-
-	cat $wifi_config | sudo tee --append /etc/wpa_supplicant/wpa_supplicant.conf
-fi
+# Set hostname to default, indicating setup is required.
+default_hostname="LogBox-new"
+echo "$default_hostname" | sudo tee /etc/hostname
 
 # Disable terminal over serial, allowing programmable serial connection.
 serial_device="serial0"
@@ -80,7 +55,7 @@ sudo apt upgrade -y
 sudo apt install -y avrdude arduino-core arduino-mk gdb-avr git python-dev python-rpi.gpio minicom unzip fail2ban
 sudo git clone https://github.com/neu-rah/PCINT.git /usr/share/arduino/libraries/pcint
 
-# Configure new user.
+# Configure users.
 logbox_home=/home/logbox
 sudo useradd --home-dir "$logbox_home" --create-home --groups adm,dialout,netdev,gpio,users,i2c,sudo logbox
 echo "logbox:$LOGBOX_PASSWORD" | sudo chpasswd
@@ -88,26 +63,18 @@ echo "PermitRootLogin no" | sudo tee -a /etc/ssh/sshd_config
 echo "AllowUsers logbox" | sudo tee -a /etc/ssh/sshd_config
 echo "logbox ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/010_logbox-nopasswd
 sudo chsh -s /bin/bash logbox
+sudo passwd pi -d
 
 # Download required scripts.
 cd "$logbox_home"
 sudo git clone https://github.com/BrightFlair/logbox-avr avr
 sudo git clone https://github.com/BrightFlair/logbox-hat.git hat
 sudo git clone https://github.com/BrightFlair/logbox-hat-update.git hat-update
+sudo git clone https://github.com/BrightFlair/logbox-os.git os
 sudo chown -R logbox:logbox "$logbox_home"
 
-# Link scripts in place for execution.
-sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
-sudo mv /usr/bin/avrdude /usr/bin/avrdude-original
-sudo ln -s "$logbox_home"/avr/avrdude-autoreset /usr/bin/avrdude
-sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-update
-
-# Install OS scripts (this repo is merged into $logbox_home, special folders copied into OS).
-sudo git clone https://github.com/BrightFlair/logbox-os /tmp/logbox-os
-sudo mv /tmp/logbox-os/* "$logbox_home"
-sudo chown -R logbox:logbox "$logbox_home"
-sudo rm -rf /tmp/logbox-os
-sudo cp -R "$logbox_home"/cron.d/* /etc/cron.d
+# Install OS scripts.
+sudo cp -R "$logbox_home/os/cron.d/*" /etc/cron.d
 
 # All done!
 sudo reboot
