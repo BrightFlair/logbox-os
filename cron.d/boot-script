@@ -1,0 +1,1 @@
+@reboot logbox /bin/bash /home/logbox/os/boot
