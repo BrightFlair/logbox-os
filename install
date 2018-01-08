@@ -76,9 +76,10 @@ sudo chown -R logbox:logbox "$logbox_home"
 # Install OS scripts.
 sudo cp "$logbox_home/os/cron.d"/* /etc/cron.d
 sudo cp "$logbox_home/os/nginx.d"/* /etc/nginx/conf.d
-sudo cp -R "$logbox_home/os/www" /var
 
 sudo rm /etc/nginx/sites-enabled/*
+sudo rm -rf /var/www
+sudo ln -s "$logbox_home/os/www" /var/www
 
 # All done!
 sudo reboot
