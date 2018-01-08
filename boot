@@ -12,6 +12,8 @@ then
 	hostname="LogBox-$mac"
 	echo "$hostname" | sudo tee /etc/hostname
 	echo -e "127.0.0.1\t$hostname" | sudo tee /etc/hosts
+	
+	sudo reboot
 fi
 
 # TODO: Set up WiFi if config file exists.
@@ -46,11 +48,3 @@ sudo ln -s "$logbox_home/hat-update/logbox-hat-update" "$logbox_hat_update_path"
 
 # Copy special directories
 sudo cp -R "$logbox_home/os/cron.d/*" /etc/cron.d
-
-if [ "$default_hostname" == "$current_hostname" ]
-then
-# This will only reboot on first boot. After then the script will continue.
-	sudo reboot
-fi
-
-sudo service nginx start
