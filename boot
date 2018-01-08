@@ -3,7 +3,7 @@
 $logbox_home=/home/logbox
 
 # Default hostname will be used to indicate setup of pi.
-default_hostname=$(cat $logbox_home/default-hostname.txt)
+default_hostname="LogBox-new"
 current_hostname=$(cat /etc/hostname)
 if [ "$default_hostname" == "$current_hostname" ]
 then
