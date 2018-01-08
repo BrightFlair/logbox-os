@@ -1,0 +1,1 @@
+@reboot logbox /bin/echo "startup script works" > /tmp/message
