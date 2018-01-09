@@ -82,4 +82,7 @@ sudo rm -rf /var/www
 sudo ln -s "$logbox_home/os/www" /var/www
 
 # All done!
+echo "Complete."
+echo "Power off the pi now if you wish to save the pre-configured image, otherwise..."
+read -p "Press enter to reboot"
 sudo reboot
