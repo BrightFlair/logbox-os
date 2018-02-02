@@ -81,6 +81,12 @@ sudo rm /etc/nginx/sites-enabled/*
 sudo rm -rf /var/www
 sudo ln -s "$logbox_home/os/www" /var/www
 
+# Link scripts in place for execution.
+sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
+sudo mv /usr/bin/avrdude /usr/bin/avrdude-original
+sudo ln -s "$logbox_home"/avr/avrdude-autoreset /usr/bin/avrdude
+sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-updat
+
 # All done!
 echo "Complete."
 echo "Power off the pi now if you wish to save the pre-configured image, otherwise..."
