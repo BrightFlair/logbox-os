@@ -85,8 +85,9 @@ sudo ln -s "$logbox_home/os/www" /var/www
 sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
 sudo mv /usr/bin/avrdude /usr/bin/avrdude-original
 sudo ln -s "$logbox_home"/avr/avrdude-autoreset /usr/bin/avrdude
-sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-updat
+sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-update
 
+/usr/bin/logbox-hat-update
 mkdir $logbox_home/serial
 
 # All done!
