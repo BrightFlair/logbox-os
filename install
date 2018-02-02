@@ -87,6 +87,8 @@ sudo mv /usr/bin/avrdude /usr/bin/avrdude-original
 sudo ln -s "$logbox_home"/avr/avrdude-autoreset /usr/bin/avrdude
 sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-updat
 
+mkdir $logbox_home/serial
+
 # All done!
 echo "Complete."
 echo "Power off the pi now if you wish to save the pre-configured image, otherwise..."
