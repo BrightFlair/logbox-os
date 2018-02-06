@@ -90,6 +90,12 @@ sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-updat
 /usr/bin/logbox-hat-update
 mkdir $logbox_home/serial
 
+mkdir -p "$logbox_home/.ssh"
+ssh-keygen -b 4096 -t rsa -f "$logbox_home/.ssh/id_logbox" -q -N ""
+echo
+cat "$logbox_home/.ssh/id_logbox.pub"
+echo
+
 # All done!
 echo "Complete."
 echo "Power off the pi now if you wish to save the pre-configured image, otherwise..."
