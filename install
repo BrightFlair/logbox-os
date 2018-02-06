@@ -89,7 +89,7 @@ sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-updat
 
 mkdir $logbox_home/serial
 sudo chown -R logbox:logbox "$logbox_home/serial"
-sudo /usr/bin/logbox-hat-update
+#sudo /usr/bin/logbox-hat-update
 
 mkdir -p "$logbox_home/.ssh"
 ssh-keygen -b 4096 -t rsa -f "$logbox_home/.ssh/id_logbox" -q -N ""
