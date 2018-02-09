@@ -80,6 +80,8 @@ sudo cp "$logbox_home/os/nginx.d"/* /etc/nginx/conf.d
 sudo rm /etc/nginx/sites-enabled/*
 sudo rm -rf /var/www
 sudo ln -s "$logbox_home/os/www" /var/www
+touch /var/www/logbox/cfg.dat
+chmod a+w /var/www/logbox/cfg.dat
 
 # Link scripts in place for execution.
 sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
@@ -89,7 +91,6 @@ sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-updat
 
 sudo mkdir $logbox_home/serial
 sudo chown -R logbox:logbox "$logbox_home/serial"
-#sudo /usr/bin/logbox-hat-update
 
 sudo mkdir -p "$logbox_home/.ssh"
 sudo ssh-keygen -b 4096 -t rsa -f "$logbox_home/.ssh/id_logbox" -q -N ""
