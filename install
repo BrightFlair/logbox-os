@@ -80,8 +80,9 @@ sudo cp "$logbox_home/os/nginx.d"/* /etc/nginx/conf.d
 sudo rm /etc/nginx/sites-enabled/*
 sudo rm -rf /var/www
 sudo ln -s "$logbox_home/os/www" /var/www
-touch /var/www/logbox/cfg.dat
-chmod a+w /var/www/logbox/cfg.dat
+sudo touch /var/www/logbox/cfg.dat
+sudo chown logbox:logbox /var/www/logbox/cfg.dat
+sudo chmod a+w /var/www/logbox/cfg.dat
 
 # Link scripts in place for execution.
 sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
