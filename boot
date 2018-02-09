@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 logbox_home=/home/logbox
 
 # Default hostname will be used to indicate setup of pi.
