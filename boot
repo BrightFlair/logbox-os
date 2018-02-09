@@ -2,7 +2,7 @@
 
 set -e
 
-$logbox_home=/home/logbox
+logbox_home=/home/logbox
 
 # Default hostname will be used to indicate setup of pi.
 default_hostname="LogBox-new"
