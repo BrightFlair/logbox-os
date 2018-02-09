@@ -40,5 +40,9 @@ sudo /usr/bin/logbox-hat-update
 # Copy special directories
 sudo rsync --delete --recursive "$logbox_home/os/cron.d" /etc/cron.d
 
+sudo touch /var/www/logbox/cfg.dat
+sudo chown logbox:logbox /var/www/logbox/cfg.dat
+sudo chmod a+w /var/www/logbox/cfg.dat
+
 python os/data-log.py &
 echo $! > /home/logbox/data-log.pid
