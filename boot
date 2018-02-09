@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 $logbox_home=/home/logbox
 
 # Default hostname will be used to indicate setup of pi.
@@ -33,26 +35,7 @@ do
 done
 cd $logbox_home
 
-# Remove any old links, reset original binaries, re-link updated AVR scripts.
-avrdude_path="/usr/bin/avrdude"
-if [ -f "$avrdude_path-original" ]
-then
-	sudo mv "$avrdude_path-original" "$avrdude_path"
-fi
-autoreset_path="/usr/bin/autoreset"
-if [ -f "$autoreset_path" ]
-	sudo rm "$autoreset_path"
-fi
-logbox_hat_update_path="/usr/bin/logbox-hat-update"
-if [ -f "$logbox_hat_update_path" ]
-	sudo rm "logbox_hat_update_path"
-fi
-sudo ln -s "$logbox_home/avr/autoreset" "$autoreset_path"
-sudo mv "$avrdude_path" "$avrdude_path-original"
-sudo ln -s "$logbox_home/avr/avrdude-autoreset" "$avrdude_path"
-sudo ln -s "$logbox_home/hat-update/logbox-hat-update" "$logbox_hat_update_path"
-
-"$(logbox_hat_update_path)"
+sudo /usr/bin/logbox-hat-update
 
 # Copy special directories
 sudo rsync --delete --recursive "$logbox_home/os/cron.d" /etc/cron.d
