@@ -33,7 +33,7 @@ do
 done
 cd $logbox_home
 
-sudo /usr/bin/logbox-hat-update
+/usr/bin/logbox-hat-update
 
 # Copy special directories
 sudo rsync --delete --recursive "$logbox_home/os/cron.d" /etc/cron.d
