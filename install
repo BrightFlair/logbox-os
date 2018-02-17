@@ -93,6 +93,11 @@ sudo ln -s "$logbox_home"/hat-update/logbox-hat-update /usr/bin/logbox-hat-updat
 sudo mkdir $logbox_home/serial
 sudo chown -R logbox:logbox "$logbox_home/serial"
 
+# Disable swap
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo update-rc.d dphys-swapfile remove
+
 sudo mkdir -p "$logbox_home/.ssh"
 sudo ssh-keygen -b 4096 -t rsa -f "$logbox_home/.ssh/id_logbox" -q -N ""
 sudo chown -R logbox:logbox "$logbox_home/.ssh"
