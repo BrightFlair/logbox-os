@@ -17,7 +17,7 @@ $latest = $files[0];
 $content = file_get_contents("$serialDir/$latest");
 $rawLines = explode("\n", $content);
 
-echo "<pre>";
+echo "<pre>" . PHP_EOL;
 foreach($rawLines as $l) {
 	$l = trim($l);
 	list($key, $value) = explode("\t", $l);
@@ -40,7 +40,7 @@ foreach($rawLines as $l) {
 
 	echo "$name\t$calcValue" . PHP_EOL;
 }
-echo "</pre>";
+echo PHP_EOL . "</pre>";
 
 
 function getValueOverTime(string $key, float $minutes) {
