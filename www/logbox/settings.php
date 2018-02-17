@@ -14,25 +14,38 @@ if(empty($data)) {
 <style>
 fieldset {
         overflow: hidden;
+	position: relative;
 }
 fieldset>h1 {
-        width: 20%;
-        font-size: 1rem;
-        margin: 0;
-        padding: 1rem;
-        padding-bottom: 0;
-        float: left;
-        box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+
 }
 fieldset>label {
-        width: 40%;
-        float: left;
+	display: block;
+	padding-left: 4rem;
+}
+fieldset>label span {
+	display: block;
+	width: 4rem;
+	padding-right: 1rem;
+}
+button {
+	display: block;
+	padding: 1rem;
+	margin: 0 auto;
 }
 </style>
 
-<form method="post" onchange="this.submit()">
+<form method="post">
         <fieldset>
                 <h1>C1</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="c1_name" value="<?php echo $data['c1_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Minutes</span>
                         <input type="num" name="c1_mins" value="<?php echo $data['c1_mins'] ?? '';?>" />
@@ -44,6 +57,10 @@ fieldset>label {
         </fieldset>
         <fieldset>
                 <h1>C2</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="c2_name" value="<?php echo $data['c2_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Minutes</span>
                         <input type="num" name="c2_mins" value="<?php echo $data['c2_mins'] ?? '';?>" />
@@ -55,6 +72,10 @@ fieldset>label {
         </fieldset>
         <fieldset>
                 <h1>C3</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="c3_name" value="<?php echo $data['c3_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Minutes</span>
                         <input type="num" name="c3_mins" value="<?php echo $data['c3_mins'] ?? '';?>" />
@@ -67,6 +88,10 @@ fieldset>label {
 
         <fieldset>
                 <h1>A1</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="a1_name" value="<?php echo $data['a1_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Formula</span>
                         <input name="a1_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['a1_formula'] ?? '';?>" />
@@ -74,6 +99,10 @@ fieldset>label {
         </fieldset>
         <fieldset>
                 <h1>A2</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="a2_name" value="<?php echo $data['a2_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Formula</span>
                         <input name="a2_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['a2_formula'] ?? '';?>" />
@@ -81,6 +110,10 @@ fieldset>label {
         </fieldset>
         <fieldset>
                 <h1>A3</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="a3_name" value="<?php echo $data['a3_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Formula</span>
                         <input name="a3_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['a3_formula'] ?? '';?>" />
@@ -88,6 +121,10 @@ fieldset>label {
         </fieldset>
         <fieldset>
                 <h1>A4</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="a4_name" value="<?php echo $data['a4_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Formula</span>
                         <input name="a4_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['a4_formula'] ?? '';?>" />
@@ -95,9 +132,15 @@ fieldset>label {
         </fieldset>
         <fieldset>
                 <h1>A5</h1>
+		<label class="large">
+			<span>Name</span>
+			<input name="a5_name" value="<?php echo $data['a5_name'] ?? '';?>" />
+		</label>
                 <label>
                         <span>Formula</span>
                         <input name="a5_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['a5_formula'] ?? '';?>" />
                 </label>
         </fieldset>
+
+	<button name="do" value="save">Save</button>
 </form>
