@@ -52,7 +52,7 @@ sudo sed -i /boot/cmdline.txt -e "s/console=serial0,[0-9]\+ //"
 # Install necessary software.
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y bc lynx avrdude arduino-core arduino-mk gdb-avr git python-dev python-rpi.gpio minicom unzip fail2ban nginx php7.0-cli php7.0-fpm php7.0-curl php7.0-json php7.0-xml
+sudo apt install -y bc avrdude arduino-core arduino-mk gdb-avr git python-dev python-rpi.gpio minicom unzip fail2ban nginx php7.0-cli php7.0-fpm php7.0-curl php7.0-json php7.0-xml
 sudo git clone https://github.com/neu-rah/PCINT.git /usr/share/arduino/libraries/pcint
 
 # Configure users.
