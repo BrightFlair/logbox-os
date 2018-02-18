@@ -29,8 +29,6 @@ fieldset>label {
 }
 fieldset>label span {
 	display: block;
-	width: 4rem;
-	padding-right: 1rem;
 }
 button {
 	display: block;
