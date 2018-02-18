@@ -18,9 +18,17 @@ $content = file_get_contents("$serialDir/$latest");
 $rawLines = explode("\n", $content);
 
 echo "<pre>" . PHP_EOL;
-foreach($rawLines as $l) {
+
+foreach($rawLines as $i => $l) {
 	$l = trim($l);
 	list($key, $value) = explode("\t", $l);
+
+	if($i === 0
+	&& empty($value)) {
+		echo $key . PHP_EOL; // Friendly name.
+		continue;
+	}
+
 	$lowerKey = strtolower($key);
 	$name = $cfg["{$lowerKey}_name"];
 
