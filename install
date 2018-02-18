@@ -41,6 +41,9 @@ fi
 default_hostname="LogBox-new"
 echo "$default_hostname" | sudo tee /etc/hostname
 
+# If there's a bigger SD card, use it all.
+raspi-config --expand-rootfs
+
 # Disable terminal over serial, allowing programmable serial connection.
 serial_device="serial0"
 sudo systemctl stop serial-getty@$serial_device.service
