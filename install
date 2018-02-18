@@ -74,8 +74,8 @@ sudo git clone https://github.com/BrightFlair/logbox-os.git os
 sudo chown -R logbox:logbox "$logbox_home"
 
 # Install OS scripts.
-sudo cp "$logbox_home/os/cron.d"/* /etc/cron.d
 sudo cp "$logbox_home/os/nginx.d"/* /etc/nginx/conf.d
+sudo crontab -u logbox "$logbox_home/os/cron.conf"
 
 sudo rm /etc/nginx/sites-enabled/*
 sudo rm -rf /var/www

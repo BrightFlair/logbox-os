@@ -35,8 +35,7 @@ cd $logbox_home
 
 /usr/bin/logbox-hat-update
 
-# Copy special directories
-sudo rsync --delete --recursive "$logbox_home/os/cron.d" /etc/cron.d
+sudo crontab -u logbox "$logbox_home/os/cron.conf"
 
 sudo touch /var/www/logbox/cfg.dat
 sudo chown logbox:logbox /var/www/logbox/cfg.dat
