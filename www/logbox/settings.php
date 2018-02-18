@@ -40,6 +40,13 @@ button {
 </style>
 
 <form method="post">
+	<fieldset>
+		<h1>LB</h1>
+		<label>
+			<span>Friendly Logbox name</span>
+			<input name="lb_name" value="<?php echo $data['lb_name'] ?? '';?>" />
+		</label>
+	</fieldset>
         <fieldset>
                 <h1>C1</h1>
 		<label class="large">
