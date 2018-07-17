@@ -29,6 +29,7 @@ declare -a component_list=("avr" "hat" "hat-update" "os")
 for component in "${component_list[@]}"
 do
 	cd "$logbox_home/$component"
+	git reset --hard
 	git pull
 done
 cd $logbox_home
