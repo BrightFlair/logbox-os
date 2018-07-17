@@ -11,6 +11,14 @@ body {
 	margin: 0;
 	font-family: sans-serif;
 }
+body::after {
+	content: attr(data-version);
+	display: block;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	opacity: 0.1;
+}
 label{
 	position: fixed;
 	display: block;
@@ -68,7 +76,7 @@ label:nth-of-type(3)>span {
 }
         </style>
 </head>
-<body>
+<body data-version="180717">
 
 <label>
 	<input type="radio" name="toggle" checked />
