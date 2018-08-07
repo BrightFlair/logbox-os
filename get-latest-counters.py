@@ -3,7 +3,7 @@ import time
 import sys
 import os
 
-print("C1:123 C2:0 C3:0");
+print("C1:1 C2:0 C3:0");
 exit()
 # This needs some attention. At the moment we're just returning 123 for c1,
 # 0 for c2 and c3
