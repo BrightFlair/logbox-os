@@ -64,7 +64,7 @@ while True:
 			c2file.write(c2)
 			c2file.close()
 		if(data.startswith("C3")):
-			c2 = data.split("\t", 1)[1]
+			c3 = data.split("\t", 1)[1]
 			c3file = open("/home/logbox/c3", "w")
 			c3file.write(c3)
 			c3file.close()
