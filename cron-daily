@@ -1,3 +1,3 @@
 #!/bin/bash
 
-reboot
+sudo reboot
