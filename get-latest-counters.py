@@ -1,79 +1,23 @@
-import serial
-import time
-import sys
-import os
+import os.path
 
-print("C1:1 C2:0 C3:0");
-exit()
-# This needs some attention. At the moment we're just returning 123 for c1,
-# 0 for c2 and c3
-# to prove that when the logbox reboots, we start counting from the
-# provided value, rather than starting from 0.
-#
-# We probably need to store the latest counter values to their own
-# files, rather than checking the serial directory, as it's very
-# likely that the serial data directory becomes empty.
+c1filename = "/home/logbox/c1"
+c2filename = "/home/logbox/c2"
+c3filename = "/home/logbox/c3"
 
-start = str(time.time())
-serialPath = "/home/logbox/serial/"
-latestFile = ""
-
-for file in os.listdir(serialPath):
-	if file > latestFile:
-		latestFile = file
-
-filePathName = serialPath + latestFile
-print("Latest timestamp: {:s}".format(filePathName))
-
-f = open(filePathName)
-lines = [line.rstrip('\r\n') for line in f]
-
-for l in lines:
-	parts = l.split("\t")
-
-	if not parts[0]:
-		continue
-
-	if parts[0][0] != "C":
-		continue
-
-	print("{:s}\t{:s}".format(parts[0], parts[1]))
-
-exit()
-
-
-
-
-fmode = "a"
-
-serialWait = 4
-
-s = serial.Serial("/dev/serial0", 9600, timeout=3)
-
-while serialWait > 0:
-	s.flushInput()
-	s.flush()
-	s.flushOutput()
-	serialWait = s.inWaiting()
-
-buffer = ""
-
-while True:
-	t = time.time();
-	print(t)
-
-	while "\n\n\n" not in buffer:
-		data = s.readline()
-		if not data:
-			continue
-
-		sys.stdout.write(data)
-		buffer += data
-
-	fname = fpath + str(t) + ".log"
-	outf = open(fname, fmode)
-	outf.write(buffer)
-	outf.flush()
-	outf.close()
-
-	buffer = ""
+if(not os.path.isfile(c1filename)):
+	print("C1:0 C2:0 C3:0")
+	exit()
+	
+c1 = 0
+with open(c1filename) as c1in:
+	c1 = c1in.read().strip()
+	
+c2 = 0
+with open(c2filename) as c2in:
+	c2 = c2in.read().strip()
+	
+c3 = 0
+with open(c3filename) as c3in:
+	c3 = c3in.read().strip()
+	
+print("C1:" + c1 + " C2:" + c2 + " C3:" + c3)

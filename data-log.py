@@ -53,6 +53,22 @@ while True:
 		if not data:
 			continue
 
+		if(data.startswith("C1")):
+			c1 = data.split("\t", 1)[1]
+			c1file = open("/home/logbox/c1", "w")
+			c1file.write(c1)
+			c1file.close()
+		if(data.startswith("C2")):
+			c2 = data.split("\t", 1)[1]
+			c2file = open("/home/logbox/c2", "w")
+			c2file.write(c2)
+			c2file.close()
+		if(data.startswith("C3")):
+			c3 = data.split("\t", 1)[1]
+			c3file = open("/home/logbox/c3", "w")
+			c3file.write(c3)
+			c3file.close()
+
 		sys.stdout.write(data)
 		buffer += data
 
