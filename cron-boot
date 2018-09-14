@@ -3,13 +3,14 @@
 logbox_home=/home/logbox
 
 # Default hostname will be used to indicate setup of pi.
+mac=$(sed s/://gi /sys/class/net/eth0/address)
+mac=${mac:(-6)}
+hostname="LogBox-$mac"
+
 default_hostname="LogBox-new"
 current_hostname=$(cat /etc/hostname)
-if [ "$default_hostname" == "$current_hostname" ]
+if [ "$hostname" != "$current_hostname" ]
 then
-	mac=$(sed s/://gi /sys/class/net/eth0/address)
-	mac=${mac:(-6)}
-	hostname="LogBox-$mac"
 	echo "$hostname" | sudo tee /etc/hostname
 	echo -e "127.0.0.1\t$hostname" | sudo tee /etc/hosts
 	
