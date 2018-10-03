@@ -12,7 +12,7 @@ current_hostname=$(cat /etc/hostname)
 if [ "$hostname" != "$current_hostname" ]
 then
 	echo "$hostname" | sudo tee /etc/hostname
-	echo -e "127.0.0.1\t$hostname" | sudo tee /etc/hosts
+	echo -e "127.0.0.1\t$hostname" | sudo tee --append /etc/hosts
 	rm -f ~/www/logbox/cfg.dat
 	
 	sudo reboot
