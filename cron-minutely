@@ -1,2 +1,3 @@
 #!/bin/bash
 /bin/bash /home/logbox/os/report-ip.bash
+/usr/bin/php /home/logbox/os/sync-remote-cfg.php
