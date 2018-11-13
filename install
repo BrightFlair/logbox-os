@@ -83,9 +83,9 @@ sudo crontab -u logbox "$logbox_home/os/cron.conf"
 sudo rm /etc/nginx/sites-enabled/*
 sudo rm -rf /var/www
 sudo ln -s "$logbox_home/os/www" /var/www
-sudo touch "$logbox_home/logbox/os/www/logbox/cfg.dat"
-sudo chown logbox:logbox "$logbox_home/logbox/os/www/logbox/cfg.dat"
-sudo chmod g+w,o+w "$logbox_home/logbox/os/www/logbox/cfg.dat"
+sudo touch "$logbox_home/os/www/logbox/cfg.dat"
+sudo chown logbox:logbox "$logbox_home/os/www/logbox/cfg.dat"
+sudo chmod g+w,o+w "$logbox_home/os/www/logbox/cfg.dat"
 
 # Link scripts in place for execution.
 sudo ln -s "$logbox_home"/avr/autoreset /usr/bin/autoreset
