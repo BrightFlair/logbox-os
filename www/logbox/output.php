@@ -30,21 +30,30 @@ foreach($rawLines as $l) {
 	$lowerKey = strtolower($key);
 	$name = $cfg["{$lowerKey}_name"];
 
-	if(empty($name)) {
-		continue;
+	if(!empty($name)) {
+		$formula = $cfg["{$lowerKey}_formula"] ?: "x";
+
+		$formula = str_replace("x", $value, $formula);
+		$calcValue = exec("echo \"$formula\" | bc");
+
+		echo "$name\t$calcValue" . PHP_EOL;
 	}
 
-	$mins = $cfg["{$lowerKey}_mins"] ?: 0;
-	if($mins > 0) {
-		$value = getValueOverTime($key, $mins);
+	$mins_name = $cfg["{$lowerKey}_mins_name"];
+	if(!empty($mins_name)) {
+		$value = 0;
+
+		$mins = $cfg["{$lowerKey}_mins"] ?: 0;
+		if($mins > 0) {
+			$value = getValueOverTime($key, $mins);
+		}
+
+		$formula = $cfg["{$lowerKey}_mins_formula"] ?: "x";
+		$formula = str_replace("x", $value, $formula);
+		$calcValue = exec("echo \"$formula\" | bc");
+
+		echo "$mins_name\t$calcValue" . PHP_EOL;
 	}
-
-	$formula = $cfg["{$lowerKey}_formula"] ?: "x";
-
-	$formula = str_replace("x", $value, $formula);
-	$calcValue = exec("echo \"$formula\" | bc");
-
-	echo "$name\t$calcValue" . PHP_EOL;
 }
 echo PHP_EOL . "</pre>";
 

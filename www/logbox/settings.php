@@ -52,13 +52,21 @@ button {
 			<input name="c1_name" value="<?php echo $data['c1_name'] ?? '';?>" />
 		</label>
                 <label>
-                        <span>Minutes</span>
-                        <input type="num" name="c1_mins" value="<?php echo $data['c1_mins'] ?? '';?>" />
-                </label>
-                <label>
                         <span>Formula</span>
                         <input name="c1_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['c1_formula'] ?? '';?>" />
                 </label>
+		<label>
+			<span>Cumulative name</span>
+			<input name="c1_mins_name" value="<?php echo $data['c1_mins_name'] ?? '';?>" />
+		</label>
+                <label>
+                        <span>Cumulative Minutes</span>
+                        <input type="num" name="c1_mins" value="<?php echo $data['c1_mins'] ?? '';?>" />
+                </label>
+		<label>
+			<span>Cumulative formula</span>
+			<input name="c1_mins_formula" value="<?php echo $data['c1_mins_formula'] ?? '';?>" />
+		</label>
         </fieldset>
         <fieldset>
                 <h1>C2</h1>
@@ -67,13 +75,21 @@ button {
 			<input name="c2_name" value="<?php echo $data['c2_name'] ?? '';?>" />
 		</label>
                 <label>
-                        <span>Minutes</span>
-                        <input type="num" name="c2_mins" value="<?php echo $data['c2_mins'] ?? '';?>" />
-                </label>
-                <label>
                         <span>Formula</span>
                         <input name="c2_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['c2_formula'] ?? '';?>" />
                 </label>
+		<label>
+			<span>Cumulative name</span>
+			<input name="c2_mins_name" value="<?php echo $data['c2_mins_name'] ?? '';?>" />
+		</label>
+                <label>
+                        <span>Cumulative Minutes</span>
+                        <input type="num" name="c2_mins" value="<?php echo $data['c2_mins'] ?? '';?>" />
+                </label>
+		<label>
+			<span>Cumulative formula</span>
+			<input name="c2_mins_formula" value="<?php echo $data['c2_mins_formula'] ?? '';?>" />
+		</label>
         </fieldset>
         <fieldset>
                 <h1>C3</h1>
@@ -82,13 +98,21 @@ button {
 			<input name="c3_name" value="<?php echo $data['c3_name'] ?? '';?>" />
 		</label>
                 <label>
-                        <span>Minutes</span>
-                        <input type="num" name="c3_mins" value="<?php echo $data['c3_mins'] ?? '';?>" />
-                </label>
-                <label>
                         <span>Formula</span>
                         <input name="c3_formula" placeholder="e.g. (x + 220) / 2" value="<?php echo $data['c3_formula'] ?? '';?>" />
                 </label>
+		<label>
+			<span>Cumulative name</span>
+			<input name="c3_mins_name" value="<?php echo $data['c3_mins_name'] ?? '';?>" />
+		</label>
+                <label>
+                        <span>Cumulative Minutes</span>
+                        <input type="num" name="c3_mins" value="<?php echo $data['c3_mins'] ?? '';?>" />
+                </label>
+		<label>
+			<span>Cumulative formula</span>
+			<input name="c3_mins_formula" value="<?php echo $data['c3_mins_formula'] ?? '';?>" />
+		</label>
         </fieldset>
 
         <fieldset>

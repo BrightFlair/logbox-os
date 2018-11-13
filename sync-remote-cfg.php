@@ -43,7 +43,7 @@ if($remoteNeedsUpdate) {
 
 if($sourceNeedsUpdate) {
         echo "Updating source..." . PHP_EOL;
-        rename($cfgPath, "$cfgPath.old");
+	copy($cfgPath, $cfgPath . ".old");
         file_put_contents($cfgPath, $json->serialized);
 }
 
