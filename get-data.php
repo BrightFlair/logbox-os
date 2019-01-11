@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-$ch = curl_init("http://localhost/output.php");
+$ch = curl_init("http://127.0.0.1/output.php");
 
 curl_setopt_array($ch, [
 	CURLOPT_RETURNTRANSFER => true,
