@@ -36,7 +36,7 @@ do
 done
 cd $logbox_home
 
-if [ ! -d cd /usr/share/arduino/libraries/EnableInterrupt ]
+if [ ! -d /usr/share/arduino/libraries/EnableInterrupt ]
 then
 	cd /usr/share/arduino/libraries
 	sudo git clone https://github.com/GreyGnome/EnableInterrupt
