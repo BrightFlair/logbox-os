@@ -36,6 +36,16 @@ do
 done
 cd $logbox_home
 
+if [ ! -d cd /usr/share/arduino/libraries/EnableInterrupt ]
+then
+	cd /usr/share/arduino/libraries
+	git clone https://github.com/GreyGnome/EnableInterrupt
+fi
+
+cd /usr/share/arduino/libraries/EnableInterrupt
+git pull
+cd
+
 /usr/bin/logbox-hat-update
 
 sudo crontab -u logbox "$logbox_home/os/cron.conf"
