@@ -46,3 +46,5 @@ sudo chmod a+w /var/www/logbox/cfg.dat
 
 python os/data-log.py &
 echo $! > /home/logbox/data-log.pid
+
+autossh -M 10984 -o "PubkeyAuthentication=yes" -o "PasswordAuthentication=no" -i ~/.ssh/id_logbox -R 11005:localhost:22 logbox@dhp.srv.brightflair.com
