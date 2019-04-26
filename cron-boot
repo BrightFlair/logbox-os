@@ -26,15 +26,40 @@ done
 
 # TODO: Set up WiFi if config file exists.
 
-# Update all components
+# Update any libraries or system code:
+arduinoLibrariesDir=/usr/share/arduino/libraries
+library_EnableInterrupt=${arduinoLibrariesDir}/EnableInterrupt
+if [ -d $library_EnableInterrupt ]
+then
+	cd $library_EnableInterrupt
+	git pull
+	cd -
+else
+	cd $arduinoLibrariesDir
+	git clone https://github.com/GreyGnome/EnableInterrupt.git EnableInterrupt
+	cd -
+	sudo reboot
+fi
+
+# Update all components:
+rebootNeeded=false
 declare -a component_list=("avr" "hat" "hat-update" "os")
 for component in "${component_list[@]}"
 do
 	cd "$logbox_home/$component"
 	git reset --hard
-	git pull
+	gitMessage=`git pull | tail -n 1`
+	if [ "$gitMessage" != "Already up-to-date." ]
+	then
+		rebootNeeded=true
+	fi
 done
 cd $logbox_home
+
+if [ "$rebootNeeded" = true ]
+then
+	sudo reboot
+fi
 
 /usr/bin/logbox-hat-update
 
