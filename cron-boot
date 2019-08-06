@@ -38,7 +38,7 @@ then
 fi
 
 # Individual logbox settings:
-if [ "$mac" == "7fba59" ] # 1908 test
+if [ "$mac" == "9cb911" ] # 1908 test
 then
 	if [ ! -f /home/logbox/masson-fix-1 ]
 	then
@@ -79,7 +79,7 @@ sudo touch /var/www/logbox/cfg.dat
 sudo chown logbox:logbox /var/www/logbox/cfg.dat
 sudo chmod a+w /var/www/logbox/cfg.dat
 
-if [ "$mac" == "7fba59" ] # 1908 test
+if [ "$mac" == "9cb911" ] # 1908 test
 then
 	if [ ! -f /home/logbox/masson-fix-2 ]
 	then
