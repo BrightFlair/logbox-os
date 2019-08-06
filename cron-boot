@@ -71,7 +71,7 @@ then
 	sudo reboot
 fi
 
-/usr/bin/logbox-hat-update
+sudo /usr/bin/logbox-hat-update
 
 sudo crontab -u logbox "$logbox_home/os/cron.conf"
 
