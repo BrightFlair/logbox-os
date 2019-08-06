@@ -37,6 +37,20 @@ then
 	sudo reboot
 fi
 
+# Individual logbox settings:
+if [ "$mac" == "9cb911" ] # 1908 test
+then
+	if [ ! -f /home/logbox/masson-fix-1 ]
+	then
+		cd /home/logbox/hat
+		git fetch && git checkout 1908-masson
+		cd /home/logbox/os
+		git fetch && git checkout 1908-masson
+		touch /home/logbox/masson-fix-1
+		sudo reboot
+	fi
+fi
+
 # Update all components:
 rebootNeeded=false
 declare -a component_list=("avr" "hat" "hat-update" "os")
@@ -57,13 +71,22 @@ then
 	sudo reboot
 fi
 
-/usr/bin/logbox-hat-update
+sudo /usr/bin/logbox-hat-update
 
 sudo crontab -u logbox "$logbox_home/os/cron.conf"
 
 sudo touch /var/www/logbox/cfg.dat
 sudo chown logbox:logbox /var/www/logbox/cfg.dat
 sudo chmod a+w /var/www/logbox/cfg.dat
+
+if [ "$mac" == "9cb911" ] # 1908 test
+then
+	if [ ! -f /home/logbox/masson-fix-2 ]
+	then
+		touch /home/logbox/masson-fix-2
+		sudo reboot
+	fi
+fi
 
 python os/data-log.py &
 echo $! > /home/logbox/data-log.pid
