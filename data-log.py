@@ -2,6 +2,7 @@ import serial
 import time
 import sys
 import subprocess
+import os
 
 start = str(time.time())
 fpath = "/home/logbox/serial/"
@@ -55,18 +56,24 @@ while True:
 
 		if(data.startswith("C1")):
 			c1 = data.split("\t", 1)[1]
-			c1file = open("/home/logbox/c1", "w")
+			c1file = open("/home/logbox/c1", "w", 1)
 			c1file.write(c1)
+			c1file.flush()
+			os.fsync(c1file)
 			c1file.close()
 		if(data.startswith("C2")):
 			c2 = data.split("\t", 1)[1]
-			c2file = open("/home/logbox/c2", "w")
+			c2file = open("/home/logbox/c2", "w", 1)
 			c2file.write(c2)
+			c2file.flush()
+			os.fsync(c2file)
 			c2file.close()
 		if(data.startswith("C3")):
 			c3 = data.split("\t", 1)[1]
-			c3file = open("/home/logbox/c3", "w")
+			c3file = open("/home/logbox/c3", "w", 1)
 			c3file.write(c3)
+			c3file.flush()
+			os.fsync(c3file)
 			c3file.close()
 
 		sys.stdout.write(data)
