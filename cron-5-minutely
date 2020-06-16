@@ -1,2 +1,4 @@
 #!/bin/bash
+sudo /etc/init.d/networking restart
+sleep 5
 /bin/bash /home/logbox/os/send-data.bash
