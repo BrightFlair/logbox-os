@@ -2,5 +2,6 @@
 mac=$(sed s/://gi /sys/class/net/eth0/address)
 mac=${mac:(-6)}
 
+cd /home/logbox/os
 ver=$(git rev-parse --short HEAD)
 curl "$mac.data.logbox.cloud?v=$ver";
