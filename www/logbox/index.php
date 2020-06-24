@@ -1,4 +1,7 @@
-<!doctype html>
+<?php
+chdir(__DIR__);
+$ver = exec("git rev-parse --short HEAD");
+?><!doctype html>
 <html>
 <head>
         <meta charset="utf-8" />
@@ -76,7 +79,7 @@ label:nth-of-type(3)>span {
 }
         </style>
 </head>
-<body data-version="180717">
+<body data-version="<?php echo $ver;?>">
 
 <label>
 	<input type="radio" name="toggle" checked />
