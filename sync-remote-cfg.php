@@ -4,6 +4,7 @@ $id = gethostname();
 $id = substr($id, strpos($id, "-") + 1);
 $ch = curl_init("http://config.logbox.cloud/remote/cfg.php?id=$id");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
 $result = curl_exec($ch);
 $json = json_decode($result);
